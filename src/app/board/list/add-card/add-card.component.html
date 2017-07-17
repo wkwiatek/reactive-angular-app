@@ -1,0 +1,32 @@
+
+<div class="add-card">
+  <form
+    *ngIf="isEditMode$ | async"
+    class="add-card__form"
+  >
+    <input
+      class="add-card__input"
+    />
+
+    <footer class="add-card__footer">
+      <button class="button button--success">
+        Add
+      </button>
+      <button
+        (click)="toggleFormMode$.next()"
+        class="button"
+      >
+        <i class="fa fa-close"></i>
+      </button>
+    </footer>
+  </form>
+  <div
+    *ngIf="!(isEditMode$ | async)"
+    (click)="toggleFormMode$.next()"
+    class="add-card__prompt"
+  >
+    <p>
+      <i class="fa fa-plus"></i> Add a card
+    </p>
+  </div>
+</div>

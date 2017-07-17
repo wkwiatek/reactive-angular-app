@@ -1,0 +1,14 @@
+<div class="list">
+  <h2 class="list__title">
+    <app-editable-header>
+      {{ list.title }}
+    </app-editable-header>
+  </h2>
+  <div class="list__cards">
+    <app-card
+      *ngFor="let card of list.cards"
+      [card]="card"
+    ></app-card>
+    <app-add-card></app-add-card>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<aside class="card-details">
+  <section class="card-details__modal">
+    <div class="card-details__body">
+      <div class="card-details__details">
+        <h2 class="card-details__details__title">
+          <app-editable-header>
+            {{ (card$ | async)?.title }}
+          </app-editable-header>
+        </h2>
+        in list <strong>{{ (listForCurrentCard$ | async)?.title}}</strong>
+      </div>
+
+      <aside class="card-details__actions">
+        <div class="card-details__move">
+          <strong>Move to: </strong>
+          <ul>
+            <li *ngFor="let list of otherListsForCurrentCard$ | async">
+               <a>{{ list.title }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <button
+          class="button"
+        >
+          <i class="fa fa-trash"></i>
+          Remove card
+        </button>
+      </aside>
+    </div>
+
+    <span
+      routerLink="/"
+      class="card-details__modal__close"
+    >
+      <i class="fa fa-close"></i>
+    </span>
+  </section>
+
+  <div
+    routerLink="/"
+    class="card-details__backdrop"
+  ></div>
+</aside>
