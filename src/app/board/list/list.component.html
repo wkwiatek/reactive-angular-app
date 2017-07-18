@@ -1,14 +1,15 @@
 <div class="list">
   <h2 class="list__title">
-    <app-editable-header>
-      {{ list.title }}
-    </app-editable-header>
+    <app-editable-header
+      [text]="list.title"
+      (onChangeText)="onListTitleChange.emit({ listId: list.id, title: $event })"
+    ></app-editable-header>
   </h2>
   <div class="list__cards">
     <app-card
       *ngFor="let card of list.cards"
       [card]="card"
     ></app-card>
-    <app-add-card></app-add-card>
+    <app-add-card (onCardCreate)="onCardCreate.emit({ listId: list.id, card: $event })"></app-add-card>
   </div>
 </div>

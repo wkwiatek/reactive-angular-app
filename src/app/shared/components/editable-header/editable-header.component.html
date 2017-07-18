@@ -1,1 +1,19 @@
-<ng-content></ng-content>
+<div
+  class="editable-header"
+  [ngClass]="{ 'editable-header--is-editing': isEditMode$ | async}"
+>
+  <input
+    *ngIf="isEditMode$ | async"
+    #newTitleInput
+    [value]="text"
+    (blur)="onChangeText.emit(newTitleInput.value)"
+    (keyup.enter)="newTitleInput.blur()"
+  >
+  <span
+    *ngIf="!(isEditMode$ | async)"
+    (click)="toggleEditMode$.next()"
+  >
+    {{ text }}
+  </span>
+</div>
+

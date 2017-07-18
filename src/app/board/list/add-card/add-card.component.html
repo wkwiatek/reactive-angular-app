@@ -2,9 +2,12 @@
 <div class="add-card">
   <form
     *ngIf="isEditMode$ | async"
+    (submit)="onCardCreate.emit(addCardForm.value)"
+    [formGroup]="addCardForm"
     class="add-card__form"
   >
     <input
+      formControlName="title"
       class="add-card__input"
     />
 

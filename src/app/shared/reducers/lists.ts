@@ -1,5 +1,6 @@
 import * as listsActions from '../actions/lists';
 import { IList } from '../models/list';
+import { RENAME_LIST } from '../actions/lists';
 
 export const initialState: IList[] = [
   {
@@ -18,6 +19,11 @@ export const initialState: IList[] = [
 
 export default function reducer(state = initialState, action: listsActions.Actions): IList[] {
   switch (action.type) {
+    case RENAME_LIST:
+      return state.map(list => list.id === action.payload.listId
+        ? { ...list, title: action.payload.title }
+        : list
+      );
     default: {
       return state;
     }

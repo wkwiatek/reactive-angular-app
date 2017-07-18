@@ -3,9 +3,10 @@
     <div class="card-details__body">
       <div class="card-details__details">
         <h2 class="card-details__details__title">
-          <app-editable-header>
-            {{ (card$ | async)?.title }}
-          </app-editable-header>
+          <app-editable-header
+            [text]="(card$ | async)?.title"
+            (onChangeText)="onCardTitleChange$.next($event)"
+          ></app-editable-header>
         </h2>
         in list <strong>{{ (listForCurrentCard$ | async)?.title}}</strong>
       </div>
@@ -15,13 +16,14 @@
           <strong>Move to: </strong>
           <ul>
             <li *ngFor="let list of otherListsForCurrentCard$ | async">
-               <a>{{ list.title }}</a>
+               <a (click)="moveCardClick$.next(list.id)">{{ list.title }}</a>
             </li>
           </ul>
         </div>
 
         <button
           class="button"
+          (click)="removeCardClick$.next()"
         >
           <i class="fa fa-trash"></i>
           Remove card

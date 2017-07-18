@@ -4,7 +4,11 @@
 
     class="board__list"
   >
-    <app-list [list]="list"></app-list>
+    <app-list
+      [list]="list"
+      (onCardCreate)="cardCreate$.next($event)"
+      (onListTitleChange)="listTitleChange$.next($event)"
+    ></app-list>
   </div>
 </div>
 <router-outlet></router-outlet>

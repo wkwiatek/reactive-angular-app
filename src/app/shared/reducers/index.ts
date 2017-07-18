@@ -1,6 +1,5 @@
-import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { combineReducers } from '@ngrx/store';
+import { compose, combineReducers, ActionReducerMap } from '@ngrx/store';
 import { routerReducer as router } from '@ngrx/router-store';
 import { createSelector } from 'reselect';
 import { localStorageSync } from 'ngrx-store-localstorage';
@@ -10,28 +9,29 @@ import lists from './lists';
 import { ICard } from '../models/card';
 import { IList } from '../models/List';
 
-const reducers = {
+export interface IState {
+  cards: ICard[];
+  lists: IList[];
+  router: any;
+}
+
+export const reducers: ActionReducerMap<IState> = {
   cards,
   lists,
   router
 };
 
-export interface IState {
-  cards: ICard[];
-  lists: IList[];
-}
-
 export function reducer(state: IState, action: { type: string, payload: any }) {
-  return compose(
-    storeFreeze,
-    // localStorageSync({
-    //   keys: [
-    //     { auth: ['token'] }
-    //   ],
-    //   rehydrate: true
-    // }),
-    combineReducers
-  )(reducers)(state, action);
+  // return compose(
+  //   storeFreeze,
+  //   // localStorageSync({
+  //   //   keys: [
+  //   //     { auth: ['token'] }
+  //   //   ],
+  //   //   rehydrate: true
+  //   // }),
+  //   combineReducers
+  // )(reducers)(state, action);
 }
 
 export const getListsWithCardsSelector = state => state.lists.map(list => ({
